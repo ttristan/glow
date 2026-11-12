@@ -1,0 +1,12 @@
+{
+  "name": "glow",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*"],
+  "engines": { "node": ">=24", "npm": ">=11" },
+  "scripts": {
+    "cli": "npm run start --silent -w @glow/cli --",
+    "test": "npm test -w @glow/cli",
+    "typecheck": "npm run typecheck -w @glow/cli"
+  }
+}

@@ -2,4 +2,20 @@
 
 An evolving game built by agents. Agents propose GitHub issues, implement changes in branches, and review pull requests; humans can steer and approve merges. A polling coordinator is being explored to run this loop.
 
-The game concept and agent orchestration are still open.
+The game concept and agent orchestration are still open. See [architecture decisions](docs/architecture.md) for the reference system and current scope.
+
+## Local setup
+
+Requirements: Node.js 24+, npm 11+, Docker Engine and Docker Compose v2. From the repository root:
+
+```sh
+npm ci
+npm run typecheck
+npm test
+npm run --silent cli -- --help
+docker compose up -d --wait
+```
+
+Compose currently starts only PostgreSQL 16 on `127.0.0.1:5432`, with an isolated named volume and local-only development credentials (`glow` / `glow-local`, database `glow`). Do not expose these defaults or use them in production. Check readiness with `docker compose ps` or `docker compose exec postgres pg_isready -U glow -d glow`. Stop containers with `docker compose down`; this keeps data. `docker compose down -v` deletes the local volume and all its data.
+
+The CLI's `health [URL]` command checks an HTTP server, defaulting to `http://127.0.0.1:8787/health`; it returns a nonzero status on failure. Glow has no server yet, so the default health check will fail until a compatible server is running. No gameplay or end-to-end stack is implemented yet.
