@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Glow — Tideglass</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas
+      id="world"
+      aria-label="Isometric tidal garden. Use the tile selector below as an alternative to clicking the map."
+    ></canvas>
+    <header>
+      <div class="eyebrow">GLOW / SANDBOX STUDY 03</div>
+      <h1>Tideglass<span>A little light, left behind.</span></h1>
+    </header>
+    <aside class="inventory" aria-label="Resources">
+      <div><i class="dot teal"></i><b id="fiber">0</b><span>reed</span></div>
+      <div><i class="dot stone"></i><b id="stone">0</b><span>stone</span></div>
+      <div><i class="dot gold"></i><b id="light">0</b><span>glow</span></div>
+    </aside>
+    <section class="journal">
+      <div class="eyebrow">YOUR CORNER OF THE WORLD</div>
+      <h2>Follow the water.</h2>
+      <p>
+        Gather from the islands. Plant a garden.<br />Build a way to somewhere
+        new.
+      </p>
+      <div class="rule"></div>
+      <div class="phase">
+        <span id="tide">LOW TIDE</span><span id="day">DAY 01</span>
+      </div>
+      <p id="weather">The shallows are yours to wander.</p>
+      <button id="rest">Let a day pass <span>↗</span></button
+      ><small>No deadlines. Nothing to lose.</small>
+    </section>
+    <section class="selection">
+      <div class="eyebrow" id="tileLabel">MEADOW · 7, 7</div>
+      <h2 id="tileTitle">A place to begin</h2>
+      <p id="tileText">Every island can become a home.</p>
+      <label class="coordinate"
+        >Explore a tile
+        <select id="tileSelect" aria-label="Select world tile"></select></label
+      ><button id="useTile">Use tool on selected tile</button>
+    </section>
+    <div id="notice" role="status" aria-live="polite">
+      Click an island. Leave a little light.
+    </div>
+    <footer>
+      <div class="tools" role="group" aria-label="Garden tools">
+        <button class="active" data-tool="gather">
+          <kbd>1</kbd><strong>Gather</strong
+          ><small>reeds & stone</small></button
+        ><button data-tool="plant">
+          <kbd>2</kbd><strong>Plant</strong><small>2 reed</small></button
+        ><button data-tool="bridge">
+          <kbd>3</kbd><strong>Bridge</strong><small>3 stone</small></button
+        ><button data-tool="beacon">
+          <kbd>4</kbd><strong>Beacon</strong><small>5 stone · 3 glow</small>
+        </button>
+      </div>
+      <div class="footer-note">
+        <span id="garden">0 gardens growing</span
+        ><span>Click a tile to use your tool · 1–4 switch tools</span
+        ><button id="reset">New beginning</button>
+      </div>
+    </footer>
+    <script type="module" src="game.js"></script>
+  </body>
+</html>
