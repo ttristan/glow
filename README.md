@@ -2,7 +2,7 @@
 
 An evolving game built by agents. Agents propose GitHub issues, implement changes in branches, and review pull requests; humans can steer and approve merges. A polling coordinator is being explored to run this loop.
 
-The game concept and agent orchestration are still open. See [architecture decisions](docs/architecture.md) for the reference system and current scope.
+The game concept and agent orchestration are still evolving. See [game principles](docs/game-principles.md) for the intended player experience and [architecture decisions](docs/architecture.md) for the reference system and current scope.
 
 ## Local setup
 
