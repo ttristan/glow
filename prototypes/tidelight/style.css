@@ -396,5 +396,19 @@ button:focus-visible {
   }
 }
 
-.brand { white-space: nowrap; }
-@media (max-width: 850px) { .brand { font-size: 35px; } .brand span { font-size: 8px; margin-left: 12px; letter-spacing: 2px; } header { gap: 12px; } }
+.brand {
+  white-space: nowrap;
+}
+@media (max-width: 850px) {
+  .brand {
+    font-size: 35px;
+  }
+  .brand span {
+    font-size: 8px;
+    margin-left: 12px;
+    letter-spacing: 2px;
+  }
+  header {
+    gap: 12px;
+  }
+}

@@ -334,6 +334,30 @@ function halo(x, y, r, color) {
   ctx.fillStyle = g;
   ctx.fillRect(x - r, y - r, r * 2, r * 2);
 }
+function drawPlayer(px, py) {
+  halo(px, py - 8, 30, "#cfe5b025");
+  ellipse(px, py + 1, 11, 5, "#091d2966");
+  ctx.strokeStyle = "#e6edc7";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.ellipse(px, py + 1, 13, 6, 0, 0, Math.PI * 2);
+  ctx.stroke();
+  polygon(
+    [
+      [px - 6, py - 11],
+      [px - 8, py - 1],
+      [px + 7, py - 1],
+      [px + 5, py - 11],
+    ],
+    "#ddccb0",
+  );
+  ellipse(px, py - 17, 5, 6, "#e5e5cc");
+  ctx.fillStyle = "#32554f";
+  ctx.fillRect(px - 5, py - 13, 10, 3);
+  ctx.fillStyle = "#e4bd7c";
+  ctx.fillRect(px + 10, py - 13, 3, 5);
+  halo(px + 11, py - 10, 15, "#f2c97638");
+}
 function draw(now) {
   const delta = Math.min((now - last) / 1000, 0.1);
   last = now;
@@ -435,6 +459,7 @@ function draw(now) {
           ctx.lineTo(px + 7, py);
           ctx.stroke();
         }
+        if (state.x === x && state.y === y) drawPlayer(px, py);
         continue;
       }
       const t = tile(x, y),
@@ -530,30 +555,7 @@ function draw(now) {
           "#dfedba13",
           "#e0edbd88",
         );
-      if (state.x === x && state.y === y) {
-        halo(px, py - 8, 30, "#cfe5b025");
-        ellipse(px, py + 1, 11, 5, "#091d2966");
-        ctx.strokeStyle = "#e6edc7";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.ellipse(px, py + 1, 13, 6, 0, 0, Math.PI * 2);
-        ctx.stroke();
-        polygon(
-          [
-            [px - 6, py - 11],
-            [px - 8, py - 1],
-            [px + 7, py - 1],
-            [px + 5, py - 11],
-          ],
-          "#ddccb0",
-        );
-        ellipse(px, py - 17, 5, 6, "#e5e5cc");
-        ctx.fillStyle = "#32554f";
-        ctx.fillRect(px - 5, py - 13, 10, 3);
-        ctx.fillStyle = "#e4bd7c";
-        ctx.fillRect(px + 10, py - 13, 3, 5);
-        halo(px + 11, py - 10, 15, "#f2c97638");
-      }
+      if (state.x === x && state.y === y) drawPlayer(px, py);
     }
   for (let i = 0; i < 24; i++) {
     const [x, y] = project(
