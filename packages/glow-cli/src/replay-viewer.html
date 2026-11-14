@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Glow replay</title>
+<style>
+body{font:16px system-ui,sans-serif;background:#10151d;color:#eaf0f6;margin:2rem}main{max-width:960px;margin:auto}button,select,input{font:inherit}button,select{padding:.4rem}nav{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}input{flex:1;min-width:12rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#1b2532;padding:1rem;border-radius:.4rem}li{margin:.5rem 0}small{color:#b2c2d1}
+</style></head><body><main><h1>Replay</h1><nav><button id="toggle">Pause</button><label>Speed <select id="speed"><option>.25</option><option>.5</option><option selected>1</option><option>2</option><option>5</option><option>10</option><option>20</option></select>×</label><input id="seek" type="range" min="0" value="0" aria-label="Replay position"><output id="time"></output></nav><p id="action"></p><p id="reason"></p><details id="plan" hidden><summary>Plan</summary><pre></pre></details><h2>Events</h2><ol id="events"></ol><p id="error" role="alert"></p></main>
+<script type="module">
+import { createReplayPlayer } from "/replay-player.js";
+(async () => {
+ const response = await fetch('/replay.json'); if (!response.ok) throw Error('Replay unavailable');
+ const {events} = await response.json();
+ const $ = id => document.getElementById(id), toggle=$('toggle'), seek=$('seek'), speed=$('speed'), list=$('events'), plan=$('plan');
+ function reset() { list.replaceChildren(); $('action').textContent=''; $('reason').textContent=''; plan.hidden=true; plan.querySelector('pre').textContent=''; }
+ function apply(e) {
+   const li=document.createElement('li'), title=document.createElement('small'), pre=document.createElement('pre');
+   title.textContent=`${(e.ms/1000).toFixed(2)} s · ${e.kind}`; pre.textContent=JSON.stringify(e.data,null,2) ?? String(e.data); li.append(title,pre); list.append(li);
+   if(e.kind==='action') { const d=e.data; const action=d && typeof d==='object' && 'action' in d ? d.action : d; $('action').textContent=`Action: ${typeof action==='string'?action:JSON.stringify(action)}`; $('reason').textContent=typeof d?.reason==='string'?`Reason: ${d.reason}`:''; }
+   if(e.kind==='plan') { plan.hidden=e.data===null; plan.querySelector('pre').textContent=e.data===null?'':JSON.stringify(e.data,null,2); }
+ }
+ const player=createReplayPlayer(events, { reset, apply, update: state => {
+   seek.max=String(state.duration); seek.value=String(state.elapsed);
+   $('time').textContent=`${(state.elapsed/1000).toFixed(1)} / ${(state.duration/1000).toFixed(1)} s`;
+   toggle.textContent=state.playing?'Pause':'Play'; toggle.dataset.playing=String(state.playing);
+ }});
+ toggle.onclick=()=>toggle.dataset.playing==='true'?player.pause():player.play();
+ seek.oninput=()=>player.seek(Number(seek.value)); speed.onchange=()=>player.setSpeed(Number(speed.value));
+ const hash=new URLSearchParams(location.hash.slice(1)); const at=Number(hash.get('replayAt'));
+ player.seek(hash.has('replayAt') && Number.isFinite(at) && at>=0?at:0);
+ if(!hash.has('replayAt')) player.play();
+ document.documentElement.dataset.replayReady='true';
+})().catch(error=>{document.getElementById('error').textContent=error.message;});
+</script></body></html>
