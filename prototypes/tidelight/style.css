@@ -1,0 +1,414 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color: #e4eee4;
+  background: #0b1d23;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+header {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  border-bottom: 1px solid #ffffff12;
+  gap: 34px;
+}
+.brand {
+  font:
+    italic 44px Georgia,
+    serif;
+  color: #eff5d9;
+  text-decoration: none;
+  letter-spacing: -3px;
+}
+.brand span {
+  font:
+    10px ui-sans-serif,
+    system-ui;
+  letter-spacing: 3px;
+  color: #8fa8a7;
+  margin-left: 22px;
+}
+.top-note {
+  color: #93aaa9;
+  font-size: 12px;
+  flex: 1;
+}
+.phase {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+.phase i {
+  height: 7px;
+  width: 7px;
+  background: #d5dca8;
+  border-radius: 50%;
+  box-shadow: 0 0 16px #d5dca8;
+}
+.phase button {
+  background: #ffffff08;
+  color: #cdddcf;
+  border: 1px solid #ffffff20;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: 14px;
+}
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  height: calc(100vh - 140px);
+  min-height: 640px;
+}
+.world {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at 50% 46%,
+    #20454b,
+    #102a33 67%,
+    #10232c
+  );
+}
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+}
+.world-title {
+  position: absolute;
+  top: 32px;
+  left: 36px;
+  pointer-events: none;
+}
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 2.4px;
+  font-weight: 600;
+  color: #90aca5;
+}
+h1 {
+  font:
+    36px Georgia,
+    serif;
+  margin: 10px 0;
+  color: #e7ead3;
+  font-weight: 400;
+}
+p {
+  line-height: 1.7;
+}
+.world-title p {
+  font-size: 12px;
+  color: #8eaca8;
+  margin: 0;
+}
+.coordinates {
+  position: absolute;
+  top: 35px;
+  right: 26px;
+  font: 10px monospace;
+  color: #86a5a3;
+}
+.toast {
+  position: absolute;
+  bottom: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #102b30e8;
+  border: 1px solid #acc9ad25;
+  border-radius: 30px;
+  padding: 12px 22px;
+  color: #d7e8ca;
+  font-size: 12px;
+  white-space: nowrap;
+  max-width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.legend {
+  position: absolute;
+  bottom: 27px;
+  left: 36px;
+  display: flex;
+  gap: 22px;
+  color: #9bb1aa;
+  font-size: 10px;
+}
+.dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.mint {
+  color: #9de0bd;
+  background-color: transparent;
+}
+.dot.mint {
+  background: #9de0bd;
+}
+.gold {
+  color: #e6c88b;
+}
+.dot.gold {
+  background: #e6c88b;
+}
+.pink {
+  color: #d7abcb;
+}
+.blue {
+  background: #6f9fa6;
+}
+aside {
+  padding: 31px 27px;
+  background: #11262b;
+  border-left: 1px solid #ffffff0c;
+  overflow: auto;
+}
+.inventory {
+  display: flex;
+  justify-content: space-between;
+  margin: 21px 0;
+}
+.inventory > div {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 1px 8px;
+}
+.resource {
+  grid-row: span 2;
+  font-size: 22px;
+  padding-top: 5px;
+}
+.inventory strong {
+  font:
+    26px Georgia,
+    serif;
+  font-weight: 400;
+}
+.inventory small {
+  font-size: 10px;
+  color: #91aaa0;
+}
+.rule {
+  height: 1px;
+  background: #ffffff12;
+  margin: 25px 0;
+}
+h2 {
+  font:
+    25px Georgia,
+    serif;
+  margin: 12px 0;
+  color: #e0e7d0;
+}
+.intro {
+  font-size: 12px;
+  color: #91aaa4;
+  margin-bottom: 22px;
+}
+.action {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  text-align: left;
+  background: #ffffff03;
+  border: 1px solid #ffffff13;
+  border-radius: 7px;
+  color: #d9e8d8;
+  padding: 13px 10px;
+  margin: 9px 0;
+  gap: 10px;
+}
+.action:hover {
+  background: #ffffff0c;
+  border-color: #96bb9b66;
+}
+.action.primary {
+  background: #a8d4b115;
+  border-color: #a8d4b13a;
+}
+.icon {
+  font-size: 23px;
+  color: #accdaf;
+  width: 25px;
+}
+.action b {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+.action small {
+  display: block;
+  font-size: 9px;
+  color: #8ca69d;
+  margin-top: 5px;
+}
+.action kbd {
+  margin-left: auto;
+}
+kbd {
+  font: 9px monospace;
+  border: 1px solid #ffffff21;
+  padding: 3px 4px;
+  border-radius: 3px;
+  color: #9eb2a7;
+}
+.upgrade {
+  margin-top: 25px;
+  border: 1px solid #bdc49425;
+  padding: 17px;
+  border-radius: 7px;
+  background: linear-gradient(125deg, #becba00b, transparent);
+}
+h3 {
+  font:
+    17px Georgia,
+    serif;
+  margin: 10px 0;
+}
+.upgrade p {
+  font-size: 10px;
+  color: #96aaa0;
+}
+.upgrade button {
+  width: 100%;
+  background: #d0dbab;
+  color: #24372e;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: left;
+  font-size: 11px;
+}
+.upgrade button span {
+  display: block;
+  font-size: 9px;
+  opacity: 0.65;
+  margin-top: 3px;
+}
+.journal {
+  margin-top: 28px;
+}
+.journal p {
+  font:
+    italic 13px/1.7 Georgia,
+    serif;
+  color: #adbbb0;
+}
+.journal > div {
+  font-size: 9px;
+  color: #769189;
+}
+footer {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 35px;
+  font-size: 10px;
+  color: #7f9994;
+  border-top: 1px solid #ffffff10;
+}
+footer em {
+  margin: 0 10px;
+}
+#reset {
+  font-size: 10px;
+  background: none;
+  border: 0;
+  color: #9db49f;
+  text-decoration: underline;
+  margin-left: 14px;
+}
+button:focus-visible {
+  outline: 2px solid #d0dbab;
+  outline-offset: 3px;
+}
+@media (max-width: 850px) {
+  header {
+    padding: 0 18px;
+  }
+  .top-note {
+    display: none;
+  }
+  header .phase {
+    margin-left: auto;
+  }
+  main {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .world {
+    height: 640px;
+  }
+  aside {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 24px;
+  }
+  .rule,
+  .intro,
+  .journal {
+    display: none;
+  }
+  .inventory {
+    margin: 0;
+  }
+  aside > h2 {
+    margin: 0;
+  }
+  .upgrade {
+    margin: 0;
+    grid-column: span 2;
+  }
+  footer {
+    height: auto;
+    gap: 16px;
+    padding: 18px;
+    flex-wrap: wrap;
+  }
+  .world-title {
+    left: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+}
+
+.brand {
+  white-space: nowrap;
+}
+@media (max-width: 850px) {
+  .brand {
+    font-size: 35px;
+  }
+  .brand span {
+    font-size: 8px;
+    margin-left: 12px;
+    letter-spacing: 2px;
+  }
+  header {
+    gap: 12px;
+  }
+}
