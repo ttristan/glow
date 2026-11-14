@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Glow · Tidelight</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="#">glow<span> / TIDELIGHT</span></a>
+      <div class="top-note">A small world. A little more alive.</div>
+      <div class="phase">
+        <i></i><span id="phase">LOW TIDE</span
+        ><button id="pause" title="Pause world">Ⅱ</button>
+      </div>
+    </header>
+    <main>
+      <section class="world">
+        <canvas
+          id="world"
+          aria-label="Isometric island. Click land to walk; use WASD or arrow keys to move."
+          tabindex="0"
+        ></canvas>
+        <div class="world-title">
+          <span class="eyebrow">THE QUIET ARCHIPELAGO</span>
+          <h1>Leave a little light.</h1>
+          <p>No destination required.</p>
+        </div>
+        <div class="coordinates" id="coordinates"></div>
+        <div class="toast" id="toast" role="status">
+          The shore is yours to wander.
+        </div>
+        <div class="legend">
+          <span><b class="dot mint"></b> Glow grove</span
+          ><span><b class="dot gold"></b> Lantern</span
+          ><span><b class="dot blue"></b> Tidal shallows</span>
+        </div>
+      </section>
+      <aside>
+        <div class="eyebrow">YOUR POCKETS</div>
+        <div class="inventory">
+          <div>
+            <span class="resource mint">✦</span><strong id="glow">0</strong
+            ><small>glow</small>
+          </div>
+          <div>
+            <span class="resource gold">◇</span><strong id="stone">0</strong
+            ><small>stone</small>
+          </div>
+          <div>
+            <span class="resource pink">❋</span><strong id="seeds">0</strong
+            ><small>seeds</small>
+          </div>
+        </div>
+        <div class="rule"></div>
+        <div class="eyebrow">MAKE YOUR MARK</div>
+        <h2>Gather. Grow. Glow.</h2>
+        <p class="intro">
+          Follow the shoreline, tend a grove, or string a trail of light across
+          the island.
+        </p>
+        <button class="action primary" id="gather">
+          <span class="icon">✦</span
+          ><span
+            ><b>Gather nearby</b
+            ><small>Grove → glow + seed · rock → stone</small></span
+          ><kbd>E</kbd></button
+        ><button class="action" id="plant">
+          <span class="icon">❋</span
+          ><span
+            ><b>Plant a glow grove</b
+            ><small>1 seed · grows on your tile</small></span
+          ><kbd>1</kbd></button
+        ><button class="action" id="build">
+          <span class="icon">♧</span
+          ><span
+            ><b>Raise a lantern</b
+            ><small>3 glow + 2 stone · nurtures groves</small></span
+          ><kbd>2</kbd>
+        </button>
+        <div class="upgrade">
+          <div class="eyebrow">A LITTLE FURTHER</div>
+          <h3 id="lens-title">Gathering lens · I</h3>
+          <p id="lens-description">Reach further. Bring home more light.</p>
+          <button id="upgrade">
+            Upgrade lens <span>6 glow + 4 stone</span>
+          </button>
+        </div>
+        <div class="journal">
+          <span class="eyebrow">ISLAND NOTES</span>
+          <p id="note">
+            The water breathes in and out. Shallow paths appear at low tide.
+          </p>
+          <div id="stats">0 groves planted · 0 lanterns lit</div>
+        </div>
+      </aside>
+    </main>
+    <footer>
+      <span
+        ><kbd>W A S D</kbd> / <kbd>↑ ← ↓ →</kbd> walk <em>·</em> click land to
+        wander <em>·</em> <kbd>E</kbd> gather</span
+      ><span
+        >Saved on this device <button id="reset">New beginning</button></span
+      >
+    </footer>
+    <script type="module" src="game.js"></script>
+  </body>
+</html>

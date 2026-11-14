@@ -14,7 +14,7 @@ Reference reviewed: `ttristan/game` on 2026-11-14. Its TypeScript/PixiJS client,
 
 ## Glow today
 
-Glow uses npm workspaces and contains a small TypeScript CLI plus a local PostgreSQL service. CLI currently checks an HTTP health endpoint only. Compose starts PostgreSQL only. There is no game server, browser client, schema, migration, gameplay protocol, or CLI/database connection.
+Glow uses npm workspaces and contains a small TypeScript CLI plus a local PostgreSQL service. CLI currently checks an HTTP health endpoint only. Compose starts PostgreSQL only. The isolated Tidelight browser prototype (`npm run prototype`) explores gathering, planting, lanterns, upgrades, and changing tides with local-storage persistence. It is client-authoritative and does not establish the production architecture. There is no game server, schema, migration, shared gameplay protocol, or CLI/database connection.
 
 The local Compose credentials are disposable development defaults, never production secrets. Keep proposed architecture distinct from implemented behavior as Glow evolves.
 
