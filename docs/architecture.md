@@ -1,16 +1,23 @@
 # Architecture foundation
 
-These are decisions to evaluate for Glow, not claims that the game services already exist. The reference is [ttristan/game at c6fe6f8](https://github.com/ttristan/game/tree/c6fe6f804aaac3ea535226f73e00290baa3db806).
+These are options informed by the reference game `ttristan/game`; they are not claims that Glow already implements them.
 
-## Reference system
+## Reference lessons
 
-- The [browser client](https://github.com/ttristan/game/tree/c6fe6f804aaac3ea535226f73e00290baa3db806/apps/browser-game) uses TypeScript and PixiJS. It renders state and sends input over WebSocket.
-- The [game server](https://github.com/ttristan/game/tree/c6fe6f804aaac3ea535226f73e00290baa3db806/apps/game-server) is authoritative for simulation and persistence. PostgreSQL stores player and world changes through Prisma. See the [architecture](https://github.com/ttristan/game/blob/c6fe6f804aaac3ea535226f73e00290baa3db806/docs/architecture.md) and [database workflow](https://github.com/ttristan/game/blob/c6fe6f804aaac3ea535226f73e00290baa3db806/docs/db-workflow.md).
-- The [agent CLI](https://github.com/ttristan/game/blob/c6fe6f804aaac3ea535226f73e00290baa3db806/docs/agent-cli.md) acts as a headless player using the same WebSocket protocol. It accepts structured commands, observes responses, and records traces. Its model-directed runner separates decisions from execution. This is a gameplay agent, distinct from the coding agent that changes the repository.
-- [npm workspaces](https://github.com/ttristan/game/blob/c6fe6f804aaac3ea535226f73e00290baa3db806/package.json) group client, server, and CLI with shared root commands. [Compose](https://github.com/ttristan/game/blob/c6fe6f804aaac3ea535226f73e00290baa3db806/docker-compose.yml) runs PostgreSQL, server, and client; its [development override](https://github.com/ttristan/game/blob/c6fe6f804aaac3ea535226f73e00290baa3db806/docker-compose.override.yml) mounts source for hot reload. A [fast configuration](https://github.com/ttristan/game/blob/c6fe6f804aaac3ea535226f73e00290baa3db806/docker-compose.fast.yml) separates test ports and database storage.
+- **Authority boundary:** browser clients render state and send inputs. Server validates gameplay and owns outcomes, persistence, and shared-world changes.
+- **One gameplay protocol:** browser and headless agent CLI use same server protocol. CLI sends structured actions, reads authoritative updates, and records traces; decision-making stays separate from action execution.
+- **Generated world persistence:** deterministic terrain can be regenerated from a seed, while database stores player state and world mutations such as mining and ownership. This avoids persisting an entire generated map.
+- **Isolated verification:** disposable test worlds keep gameplay checks from changing development data. CLI traces and replays make agent actions inspectable without using browser automation as the gameplay interface.
+- **Clear sources of truth:** server owns gameplay config and protocol shapes; database schema and migrations define persisted state. Clients consume server state rather than duplicating rules.
 
-## Adaptation for Glow
+Reference reviewed: `ttristan/game` on 2026-11-14. Its TypeScript/PixiJS client, WebSocket server, PostgreSQL/Prisma storage, npm workspaces, Compose setup, and Agent CLI are examples, not Glow decisions.
 
-Start with the workspace layout, a local PostgreSQL service, and a small TypeScript CLI. Once gameplay exists, a server-authoritative protocol and a headless client on that same protocol would make agent behavior testable without a browser or privileged database access. A separate disposable test database would keep automated play from mutating development state. Prisma, PixiJS, actual protocol messages, gameplay, and the source CLI are not yet chosen or copied: they depend on the game design.
+## Glow today
 
-The CLI currently checks an HTTP health endpoint only; it cannot play a game. Compose starts only PostgreSQL; there is no Glow client, server, schema, migration, or connection between the CLI and database yet. These are follow-up decisions, not implemented services. The fixed database credentials in Compose are disposable local defaults, not production secrets.
+Glow uses npm workspaces and contains a small TypeScript CLI plus a local PostgreSQL service. CLI currently checks an HTTP health endpoint only. Compose starts PostgreSQL only. There is no game server, browser client, schema, migration, gameplay protocol, or CLI/database connection.
+
+The local Compose credentials are disposable development defaults, never production secrets. Keep proposed architecture distinct from implemented behavior as Glow evolves.
+
+## Options for Glow
+
+Once gameplay exists, a server-authoritative protocol shared by browser and headless CLI would support gameplay verification without a browser or privileged database access. If terrain is generated, deterministic generation plus persisted mutations may suit the world model. A disposable test database would protect development state. Choose these based on game design; Prisma, PixiJS, protocol messages, and gameplay rules remain undecided.
