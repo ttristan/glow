@@ -21,3 +21,7 @@ Compose currently starts only PostgreSQL 16 on `127.0.0.1:5432`, with an isolate
 The CLI's `health [URL]` command checks an HTTP server, defaulting to `http://127.0.0.1:8787/health`; it returns a nonzero status on failure. Glow has no server yet, so the default health check will fail until a compatible server is running. No gameplay or end-to-end stack is implemented yet.
 
 CLI health runs save a timestamped replay artifact. Use `npm run --silent cli -- replay FILE` to open its local viewer; see the [CLI artifact workflow](docs/workflows/cli-artifacts.md) for capture and storage details.
+
+## Playable design study
+
+[Tideglass](prototypes/tideglass/README.md) is a standalone browser prototype: gather, garden, bridge tidal water, and grow beacons. It uses local browser saves; it is separate from the CLI and proposed gameplay services.
