@@ -19,3 +19,5 @@ docker compose up -d --wait
 Compose currently starts only PostgreSQL 16 on `127.0.0.1:5432`, with an isolated named volume and local-only development credentials (`glow` / `glow-local`, database `glow`). Do not expose these defaults or use them in production. Check readiness with `docker compose ps` or `docker compose exec postgres pg_isready -U glow -d glow`. Stop containers with `docker compose down`; this keeps data. `docker compose down -v` deletes the local volume and all its data.
 
 The CLI's `health [URL]` command checks an HTTP server, defaulting to `http://127.0.0.1:8787/health`; it returns a nonzero status on failure. Glow has no server yet, so the default health check will fail until a compatible server is running. No gameplay or end-to-end stack is implemented yet.
+
+CLI health runs save a timestamped replay artifact. Use `npm run --silent cli -- replay FILE` to open its local viewer; see the [CLI artifact workflow](docs/workflows/cli-artifacts.md) for capture and storage details.
