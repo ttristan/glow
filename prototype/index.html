@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glow — The quiet field</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="shell">
+  <header><div class="brand"><span class="brand-mark">✳</span><span>GLOW <small> / &nbsp;FIELD NOTES 001</small></span></div><div class="header-right"><span class="live-dot"></span> A LITTLE WORLD TO MAKE YOUR OWN</div></header>
+  <section class="intro"><div><div class="eyebrow"><span>✦</span> A PLAYABLE PROTOTYPE</div><h1>The quiet field<span>.</span></h1><p>Wander a little. Gather what grows. Leave a light on.</p></div><div class="time"><span>☼</span><div>THE LONG AFTERNOON<small>No rush. Stay a while.</small></div></div></section>
+  <section class="game-layout"><div class="world-wrap"><canvas id="world" width="960" height="600" aria-label="A meadow to explore. Use arrow keys or WASD to move."></canvas><div class="world-label"><span>✳</span> THE MEADOW <small> / &nbsp; SOMEWHERE WARM</small></div><div class="world-hint">WASD / ARROWS <span>MOVE</span> &nbsp;&nbsp; SPACE <span>GATHER</span></div><div id="toast" role="status">A quiet place to begin.</div></div>
+  <aside><div class="panel-heading"><div><div class="eyebrow">YOUR FIELD JOURNAL</div><h2>Make yourself<br>at home<span>.</span></h2></div><span class="asterisk">✳</span></div><p class="panel-copy">The field is yours to explore. Gather nearby plants and stones, then make something that lasts.</p>
+    <div class="section-title"><span>YOUR POCKETS</span><span>01 / RESOURCES</span></div><div class="resources"><div><span class="resource-icon leaf">✦</span><strong id="fiber">0</strong><small>WILD FIBER</small></div><div><span class="resource-icon stone">◆</span><strong id="stone">0</strong><small>STONE</small></div><div><span class="resource-icon light">✹</span><strong id="lights">0</strong><small>LIGHTS PLACED</small></div></div>
+    <div class="section-title actions-title"><span>MAKE SOMETHING</span><span>02 / ACTIONS</span></div>
+    <button id="gather"><span class="button-icon">✦</span><span><b>Gather nearby</b><small>Collect a plant or stone within reach</small></span><kbd>SPACE</kbd></button>
+    <button id="beacon"><span class="button-icon">✳</span><span><b>Plant a little light</b><small>3 fiber + 2 stone · place where you stand</small></span><span class="arrow">↗</span></button>
+    <button id="upgrade"><span class="button-icon">↟</span><span><b id="upgrade-title">Wider reach</b><small id="upgrade-copy">4 fiber + 3 stone · gather from further away</small></span><span class="arrow">↗</span></button>
+    <div class="journal-foot"><span>✧</span><p>There is no finish line here.<br><b>Just see what grows.</b></p></div>
+  </aside></section><footer><span>GLOW &nbsp; / &nbsp; AN EXPERIMENT IN TAKING YOUR TIME</span><span>EXPLORE · GATHER · CREATE &nbsp; ✳</span></footer>
+</main><script src="game.js"></script></body></html>
